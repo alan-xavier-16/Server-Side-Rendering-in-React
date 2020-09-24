@@ -1,5 +1,7 @@
 import "babel-polyfill";
 import express from "express";
+import { matchRoutes } from "react-router-config";
+import Routes from "./client/Routes";
 import renderer from "./helpers/renderer";
 import createReduxStore from "./helpers/createStore";
 
@@ -10,6 +12,12 @@ app.use(express.static("public"));
 
 app.get("*", (req, res) => {
   const store = createReduxStore();
+
+  // LOAD SPECIFIC ROUTE DATA
+  matchRoutes(Routes, req.path).map(({ route }) =>
+    route.loadData ? route.loadData : null
+  );
+
   res.send(renderer(req, store));
 });
 
