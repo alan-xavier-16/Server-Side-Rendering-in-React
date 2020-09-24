@@ -5,8 +5,8 @@ const app = express();
 // EXPRESS TO MAKE THIS DIRECTORY AVAILABLE TO BROWSERS
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.send(renderer());
+app.get("*", (req, res) => {
+  res.send(renderer(req));
 });
 
 app.listen(3000, () => {
