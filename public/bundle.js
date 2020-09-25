@@ -29804,8 +29804,8 @@ function mapStateToProps(state) {
   return { users: state.users };
 }
 
-function loadData() {
-  console.log("I am loading some data...");
+function loadData(store) {
+  store.dispatch((0, _actions.fetchUsers)());
 }
 
 exports.loadData = loadData;
